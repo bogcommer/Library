@@ -11,7 +11,7 @@ body {
     background-color: lightgray;
 }
 
-button {
+.btns > button, .book > button {
     padding: 10px;
     background-color: darkcyan;
     color: white;
@@ -49,10 +49,29 @@ button {
     padding: 10px;
 }
 
-.book > button {
+.btns > button:hover, .book > button:hover {
+    background-color: rgb(3, 149, 159);
+    cursor: grab;
 }
 
-button:hover {
-    background-color: rgb(3, 149, 159);
+.add-book-dialog[open] {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: rgb(219, 219, 28);
+}
+
+.add-book-dialog h3 {
+    margin: auto;
+}
+
+.book-input {
+    padding: 10px;
+}
+
+.dialog-close {
+    background-color: white;
+    margin-left: 95%;
     cursor: grab;
 }

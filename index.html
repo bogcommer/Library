@@ -17,6 +17,34 @@
     </div>
 
     <div class="books"></div>
+
+    <dialog class="add-book-dialog">
+      <button class="dialog-close">x</button>
+      <h3>Add new Book</h3>
+
+      <div class="book-input">
+        <label for="book-title">Book Title</label>
+        <input id="book-title" name="book-title" />
+      </div>
+
+      <div class="book-input">
+        <label for="book-author">Book Author</label>
+        <input id="book-author" name="book-author" />
+      </div>
+
+      <div class="book-input">
+        <label for="book-pages">Number of Pages?</label>
+        <input id="book-pages" name="book-pages" />
+      </div>
+
+      <div class="book-input">
+        <label for="book-read">Read?</label>
+        <input type="checkbox" id="book-read" name="book-read" />
+      </div>
+
+      <button type="button" class="submit-book">Submit</button>
+    </dialog>
+
     <script src="script.js"></script>
   </body>
 </html>
