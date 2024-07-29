@@ -5,7 +5,7 @@ const addData = document.querySelector(".add-book");
 const addDataDialog = document.querySelector(".add-book-dialog");
 const submitBook = document.querySelector(".submit-book");
 const closeDialog = document.querySelector(".dialog-close");
-const removeData = document.querySelector(".remove");
+const removeData = document.querySelector(".remove-book");
 
 let mockDataAdded = false;
 let start = 0;
@@ -26,9 +26,9 @@ function addBookToLibrary(id, title, author, pages, read) {
 mockData.onclick = () => {
     if (mockDataAdded === false) {
         addBookToLibrary(start, "Title1", "Author1", 25, "Yes");
-        addBookToLibrary(start, "Title2", "Author2", 55, "No");
-        addBookToLibrary(start, "Title3", "Author3", 90, "No");
-        addBookToLibrary(start, "Title4", "Author4", 125, "Yes");
+        addBookToLibrary(start + 1, "Title2", "Author2", 55, "No");
+        addBookToLibrary(start + 2, "Title3", "Author3", 90, "No");
+        addBookToLibrary(start + 3, "Title4", "Author4", 125, "Yes");
 
         addBookToView()
         mockDataAdded = true;
@@ -52,24 +52,16 @@ submitBook.onclick = () => {
     console.log(myLibrary);
 }
 
-removeData.onclick = () => {
-    removeBook();
-}
 
-function removeBook() {
-    
-}
 
 function newBook() {
     const newBookTitle = document.querySelector("#book-title");
     const newBookAuthor = document.querySelector("#book-author");
     const newBookPages = document.querySelector("#book-pages");
     const newBookRead = document.querySelector("#book-read");
-    const newBookID = 0;
-
-    addBookToLibrary(newBookID, newBookTitle.value, newBookAuthor.value, newBookPages.value, newBookRead.value)
+    let newBookID = start;
     
-    newBookID = start;
+    addBookToLibrary(newBookID, newBookTitle.value, newBookAuthor.value, newBookPages.value, newBookRead.value);
     newBookTitle.value = "";
     newBookAuthor.value = "";
     newBookPages.value = "";
@@ -78,6 +70,7 @@ function newBook() {
 
 function addBookToView() {
     const books = document.querySelector(".books");
+    books.innerHTML = '';
     for (let i = start; i < myLibrary.length; i++) {
         let book = myLibrary[i];
         let bookEl = document.createElement("div");
@@ -88,9 +81,23 @@ function addBookToView() {
         <p>${book.pages}</p>
         <p>${book.read}</p>
         
-        <button class="remove">Remove Book</button>`
-        books.appendChild(bookEl);
+        <button class="remove-book">Remove Book</button>`
 
-        start++;
+        bookEl.querySelector(".remove-book").addEventListener("click", () => {
+            removeBook(book.id);
+        });
+
+        books.appendChild(bookEl);
     }
+}
+
+
+function removeBook(bookID) {
+    const bookIndex = myLibrary.findIndex(book => book.id === bookID);
+
+    if (bookIndex !== -1) {
+        myLibrary.splice(bookIndex, 1);
+        addBookToView();
+    }
+    console.log(myLibrary);
 }
